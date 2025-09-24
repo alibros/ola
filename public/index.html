@@ -7,44 +7,95 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>OLA</h1>
-      <select id="model-select"></select>
+  <div class="glow glow-one"></div>
+  <div class="glow glow-two"></div>
+  <div class="app-shell">
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-mark">O</div>
+        <div class="brand-copy">
+          <span class="brand-title">OLA</span>
+          <p>Local AI Studio</p>
+        </div>
+      </div>
+      <div class="model-select-group">
+        <label for="model-select">Active model</label>
+        <div class="select-wrap">
+          <select id="model-select"></select>
+          <span class="select-caret"></span>
+        </div>
+      </div>
     </header>
-    <main id="chat-area"></main>
-    <form id="chat-form">
-      <input type="text" id="user-input" placeholder="Type your message..." autocomplete="off" required />
-      <button type="submit">Send</button>
-    </form>
-    <div id="metrics-bar">
-      <span id="current-metrics"></span>
-      <button id="show-metrics" title="Show all model metrics">📊</button>
+
+    <div class="layout">
+      <section class="chat-column">
+        <div class="chat-header">
+          <h2>Conversation</h2>
+          <p>Chat with any model running locally.</p>
+        </div>
+        <div id="chat-area" class="chat-stream"></div>
+        <form id="chat-form" class="composer">
+          <input type="text" id="user-input" placeholder="Ask anything..." autocomplete="off" required />
+          <button type="submit">
+            <span>Send</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 12h14m0 0-5-5m5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </form>
+      </section>
+
+      <aside class="info-column">
+        <div id="metrics-bar" class="metrics-card">
+          <div class="metrics-header">
+            <div>
+              <h2>Live metrics</h2>
+              <p>Monitor latency, throughput, and quality.</p>
+            </div>
+            <button id="show-metrics" title="Show all model metrics">View all</button>
+          </div>
+          <div class="metrics-body">
+            <span id="current-metrics"></span>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>Pro tips</h3>
+          <ul>
+            <li>Shift + Enter adds a new line.</li>
+            <li>Swap models instantly from the menu.</li>
+            <li>Rate replies to improve your metrics.</li>
+          </ul>
+        </div>
+      </aside>
     </div>
-    <footer>
+
+    <footer class="app-footer">
       <span>OLA</span>
       <a href="https://github.com/ollama/ollama" target="_blank" rel="noopener">Powered by Ollama</a>
     </footer>
-    <div id="metrics-modal" class="modal">
-      <div class="modal-content">
-        <span class="close" id="close-metrics">&times;</span>
-        <h2>Model Performance Metrics</h2>
-        <table id="metrics-table">
-          <thead>
-            <tr>
-              <th>Model</th>
-              <th>Size</th>
-              <th>Avg Latency</th>
-              <th>Tokens/sec</th>
-              <th>User Rating</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-        <button id="reset-metrics" style="margin-top:1.5rem;float:right;background:#2563eb;color:#fff;border:none;padding:0.5rem 1.2rem;border-radius:6px;cursor:pointer;font-size:1rem;">Reset Metrics</button>
-      </div>
+  </div>
+
+  <div id="metrics-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="metrics-title">
+    <div class="modal-content">
+      <button class="close" id="close-metrics" aria-label="Close metrics">&times;</button>
+      <h2 id="metrics-title">Model Performance Metrics</h2>
+      <table id="metrics-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Size</th>
+            <th>Avg Latency</th>
+            <th>Tokens/sec</th>
+            <th>User Rating</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button id="reset-metrics" class="primary-btn">Reset Metrics</button>
     </div>
   </div>
+
   <script src="app.js"></script>
 </body>
-</html> 
+</html>
